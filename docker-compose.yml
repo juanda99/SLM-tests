@@ -1,0 +1,17 @@
+services:
+  openwebui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: openwebui
+    ports:
+      - "8080:8080"
+    volumes:
+      - openwebui_data:/app/backend/data
+    restart: unless-stopped
+    environment:
+      - HF_TOKEN=${HF_TOKEN}
+      - HF_HUB_DISABLE_TELEMETRY=${HF_HUB_DISABLE_TELEMETRY}
+      - TRANSFORMERS_OFFLINE=${TRANSFORMERS_OFFLINE}
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+
+volumes:
+  openwebui_data:
